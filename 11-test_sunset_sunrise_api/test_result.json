@@ -1,0 +1,35 @@
+{
+  "formatted=0": {
+    "results": {
+      "sunrise": "2025-02-05T07:31:29-05:00",
+      "sunset": "2025-02-05T17:41:01-05:00",
+      "solar_noon": "2025-02-05T12:36:15-05:00",
+      "day_length": 36572,
+      "civil_twilight_begin": "2025-02-05T07:03:02-05:00",
+      "civil_twilight_end": "2025-02-05T18:09:27-05:00",
+      "nautical_twilight_begin": "2025-02-05T06:29:04-05:00",
+      "nautical_twilight_end": "2025-02-05T18:43:26-05:00",
+      "astronomical_twilight_begin": "2025-02-05T05:55:41-05:00",
+      "astronomical_twilight_end": "2025-02-05T19:16:48-05:00"
+    },
+    "status": "OK",
+    "tzid": "America/Toronto"
+  },
+
+  "formatted=1": {
+    "results": {
+      "sunrise": "7:31:29 AM",
+      "sunset": "5:41:01 PM",
+      "solar_noon": "12:36:15 PM",
+      "day_length": "10:09:32",
+      "civil_twilight_begin": "7:03:02 AM",
+      "civil_twilight_end": "6:09:27 PM",
+      "nautical_twilight_begin": "6:29:04 AM",
+      "nautical_twilight_end": "6:43:26 PM",
+      "astronomical_twilight_begin": "5:55:41 AM",
+      "astronomical_twilight_end": "7:16:48 PM"
+    },
+    "status": "OK",
+    "tzid": "America/Toronto"
+  }
+}

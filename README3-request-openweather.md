@@ -10,8 +10,8 @@
     - [1.1.1. test API1 `current` main data](#111-test-api1-current-main-data)
     - [1.1.2. Testing API2 `5 days each 3 hours`](#112-testing-api2-5-days-each-3-hours)
     - [1.1.3. Requesting maps](#113-requesting-maps)
-    - [Testing API getting air quality](#testing-api-getting-air-quality)
-    - [testing API5 geo data](#testing-api5-geo-data)
+    - [1.1.4. Testing API getting air quality](#114-testing-api-getting-air-quality)
+    - [1.1.5. testing API5 geo data](#115-testing-api5-geo-data)
   - [1.2. The website offers icons](#12-the-website-offers-icons)
 
 ## 1.1. Free account can access 5 APIs
@@ -76,7 +76,7 @@ GPT: OpenWeatherMap provides individual 256x256 PNG tiles based on the Slippy Ma
 
 ![142 get map](./90-markdown-resources/142-requesting-map.png)
 
-### Testing API getting air quality
+### 1.1.4. Testing API getting air quality
 
 Data is simple, the API document has instruction about how to understand the numbers.
 
@@ -93,7 +93,7 @@ Data is simple, the API document has instruction about how to understand the num
 }
 ```
 
-### testing API5 geo data
+### 1.1.5. testing API5 geo data
 
 It's about the name texts in different languages, it's an online tool might be useful for me 100 years later.
 
