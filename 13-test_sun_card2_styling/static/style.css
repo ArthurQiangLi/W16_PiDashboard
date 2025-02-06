@@ -1,0 +1,16 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: white;
+  color: black;
+}
+.card {
+  width: 500px;
+  padding: 20px;
+  margin: 20px auto;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+svg {
+  width: 100%;
+}

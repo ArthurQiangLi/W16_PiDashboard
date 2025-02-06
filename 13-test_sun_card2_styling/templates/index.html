@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sun Card</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="card">
+      <h2>Sunrise & Sunset</h2>
+      <svg width="500" height="200" viewBox="0 0 500 200">
+        <!-- Sine Wave Path -->
+        <path id="sun-path" stroke="black" fill="none" stroke-width="2" />
+
+        <!-- Sun (yellow circle) -->
+        <circle id="sun" cx="0" cy="0" r="10" fill="yellow"></circle>
+      </svg>
+    </div>
+
+    <script src="{{ url_for('static', filename='sun_card.js') }}"></script>
+    <script>
+      // Generate the sine wave trajectory and update the SVG path
+      function generateSunPath() {
+        let T = 24 * 60; // Full period (1440 minutes)
+        let N = 30; // Phase shift (6 hours)
+        let A = 50; // Amplitude (height of the curve)
+        let C = 100; // Offset (baseline height)
+
+        let path = document.getElementById("sun-path");
+        let d = "M ";
+
+        for (let t = 0; t <= T; t += 10) {
+          // Step every 10 minutes
+          let x = (t / T) * 500; // Scale to SVG width
+          let y =
+            A * Math.cos((2 * Math.PI * t) / T - (2 * Math.PI * N) / T) + C;
+          d += `${x},${y} `;
+        }
+
+        path.setAttribute("d", d);
+      }
+
+      generateSunPath(); // Draw the trajectory
+    </script>
+  </body>
+</html>
