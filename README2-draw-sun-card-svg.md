@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [Drawing sun-card svg on 500x200 coordinate](#drawing-sun-card-svg-on-500x200-coordinate)
+  - [`sun-card.js` Structure](#sun-cardjs-structure)
   - [1. Coordinate system](#1-coordinate-system)
   - [2. How the svg fit it's parent box](#2-how-the-svg-fit-its-parent-box)
   - [3. Draw the sun path](#3-draw-the-sun-path)
@@ -14,7 +15,13 @@
   - [8. Add new line to svg using js](#8-add-new-line-to-svg-using-js)
 
 <!-- /TOC -->
-<!-- /TOC -->
+
+## `sun-card.js` Structure
+
+Suncard structure:
+![sun-card structure](./90-markdown-resources/13-suncard%20js%20structure.png)
+Suncard svg layout:
+![svg layout](./90-markdown-resources/14-suncard%20svg%20layout.png)
 
 > Note: `500` in width and `200` in height is hard-coded.
 

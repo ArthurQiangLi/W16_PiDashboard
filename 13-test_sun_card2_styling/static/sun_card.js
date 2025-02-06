@@ -15,7 +15,7 @@ function f1_fetchSunData() {
       g_sunData = data; // Store data globally
       f3_calcNoonShift(g_sunData.solar_noon);
       f2_generateSunPath(); // Draw the trajectory
-      f6_adjustHorizonSky(f4_cvtHhmmToMinutes(data.current_time));
+      // f6_adjustHorizonSky(f5_cvtHhmmToMinutes(data.current_time));
     });
 }
 
@@ -23,14 +23,14 @@ function f7_updatePeriodically() {
   let now = new Date();
   // console.log("updateing at ", now);
   let hhmm = now.toTimeString().slice(0, 5); // "HH:MM"
-  let nowMinutes = f4_cvtHhmmToMinutes(hhmm);
+  let nowMinutes = f5_cvtHhmmToMinutes(hhmm);
 
   f4_updateSunXY(nowMinutes);
   f6_adjustHorizonSky(nowMinutes);
 }
 
 // Function to map time to an (x, y) coordinate on the SVG
-function calcSunXY(minutes) {
+function f8_calcSunXY(minutes) {
   let T = 24 * 60; // Full period (1440 minutes)
   let N = g_noonShift; // Phase shift
   let A = 50; // Amplitude (height of the curve)
@@ -46,14 +46,14 @@ function calcSunXY(minutes) {
 function f4_updateSunXY(nowMinutes) {
   let sun = document.getElementById("svg-sun");
 
-  let { x, y } = calcSunXY(nowMinutes);
+  let { x, y } = f8_calcSunXY(nowMinutes);
 
   // Update sun's position on the SVG
   sun.setAttribute("cx", x);
   sun.setAttribute("cy", y);
 }
 
-function f4_cvtHhmmToMinutes(HHMM_str) {
+function f5_cvtHhmmToMinutes(HHMM_str) {
   if (typeof HHMM_str !== "string" || !HHMM_str.includes(":")) {
     console.error("Invalid input:", HHMM_str);
     return 0;
@@ -66,7 +66,7 @@ function f4_cvtHhmmToMinutes(HHMM_str) {
 
 //if solar_noon is 12:30, then Phase shift is 30 (in minutes), if 11:30, then -30
 function f3_calcNoonShift(solar_noon) {
-  const m = f4_cvtHhmmToMinutes(solar_noon);
+  const m = f5_cvtHhmmToMinutes(solar_noon);
   const noonMinutes = 12 * 60;
   g_noonShift = m - noonMinutes;
   return g_noonShift;
@@ -79,7 +79,7 @@ function f2_generateSunPath() {
   let d = "M ";
 
   for (let t = 0; t <= T; t += 10) {
-    let { x, y } = calcSunXY(t);
+    let { x, y } = f8_calcSunXY(t);
     d += `${x},${y} `;
   }
 
@@ -111,10 +111,10 @@ function f6_adjustHorizonSky(now_m) {
   let gnd = document.getElementById("svg-gnd");
   let sunrise = document.getElementById("svg-sunrise");
   let sunset = document.getElementById("svg-sunset");
-  const sunrise_m = f4_cvtHhmmToMinutes(g_sunData.sunrise); //get sunrise t-minutes
-  const sunset_m = f4_cvtHhmmToMinutes(g_sunData.sunset); //get sunset t-minutes
-  let sunriseXY = calcSunXY(sunrise_m);
-  let sunsetXY = calcSunXY(sunset_m);
+  const sunrise_m = f5_cvtHhmmToMinutes(g_sunData.sunrise); //get sunrise t-minutes
+  const sunset_m = f5_cvtHhmmToMinutes(g_sunData.sunset); //get sunset t-minutes
+  let sunriseXY = f8_calcSunXY(sunrise_m);
+  let sunsetXY = f8_calcSunXY(sunset_m);
   // console.log("hor:", x, y);
   hor.setAttribute("y1", sunriseXY.y);
   hor.setAttribute("y2", sunriseXY.y);
