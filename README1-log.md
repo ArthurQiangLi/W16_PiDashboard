@@ -7,3 +7,5 @@
 ![log2](./90-markdown-resources/log2.png)
 
 ![log3](./90-markdown-resources/log3.png)
+
+![log4](./90-markdown-resources/log4.png)
