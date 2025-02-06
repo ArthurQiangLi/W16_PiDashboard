@@ -10,6 +10,7 @@
   - [5. Color settings](#5-color-settings)
   - [5. JS datetime format converting](#5-js-datetime-format-converting)
   - [6. Use SVG Gradients](#6-use-svg-gradients)
+  - [7. ??? Question, I can only place 'f3, f2, f6, f4' in f1.](#7--question-i-can-only-place-f3-f2-f6-f4-in-f1)
 
 <!-- /TOC -->
 <!-- /TOC -->
@@ -140,4 +141,33 @@ After I add the `30%`, the edge of the sun is solid then.
 <!-- Apply the gradient to a circle -->
 <circle id="svg-sun" cx="-20" cy="-20" r="15" fill="url(#glowGradient)"></circle>
 <!-- <circle id="sun1" cx="390" cy="100" r="5" fill="white"></circle> -->
+```
+
+## 7. ??? Question, I can only place 'f3, f2, f6, f4' in f1.
+
+Here is a problem, if I put `f3, f2, f6, f4` after f5, they won't work. I don't know why.
+[2025-02-06 10:34:39]
+
+```js
+document.addEventListener("DOMContentLoaded", function () {
+  f1_fetchSunData();
+  f5_addGridLines();
+  // Fetch sun data every 30 seconds
+  setInterval(f4_updateSunXY, 5000); // 30,000 milliseconds = 30 seconds
+});
+
+let g_sunData = {}; // Global variable
+let g_noonShift = 0; // noon shift in minutes, if solar_noon=11:30, noon_shift=-30
+
+function f1_fetchSunData() {
+  fetch("/sun-data")
+    .then((response) => response.json())
+    .then((data) => {
+      g_sunData = data; // Store data globally
+      f3_calcNoonShift(g_sunData.solar_noon);
+      f2_generateSunPath(); // Draw the trajectory
+      f6_adjustHorizon();
+      f4_updateSunXY();
+    });
+}
 ```
