@@ -22,6 +22,7 @@ Link : https://github.com/AitorDB/home-assistant-sun-card
 | ---------------------------------------------- | -------------------------------------------------- |
 | ![day](./90-markdown-resources/4-hass-day.png) | ![night](./90-markdown-resources/5-hass-night.png) |
 
-|                                                                      |                                                                     |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| **hass** is using a fixed Bezier curve. It's **NOT** my best choice. | ![hass sun path](./90-markdown-resources/3-hass-sun-trajectory.png) |
+|                                                                        |                                                                     |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| **hass** is using a fixed Bezier curve. It's **NOT** my best choice.   | ![hass sun path](./90-markdown-resources/3-hass-sun-trajectory.png) |
+| Sine wave looks better: [https://www.desmos.com/calculator/nqfu5lxaij] | ![sine wave](./90-markdown-resources/15-sine-wave.png)              |
