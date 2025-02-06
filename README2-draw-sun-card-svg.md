@@ -1,8 +1,8 @@
-# Drawing sun-card svg
+# Drawing sun-card svg on 500x200 coordinate
 
 <!-- TOC -->
 
-- [Drawing sun-card svg](#drawing-sun-card-svg)
+- [Drawing sun-card svg on 500x200 coordinate](#drawing-sun-card-svg-on-500x200-coordinate)
   - [1. Coordinate system](#1-coordinate-system)
   - [2. How the svg fit it's parent box](#2-how-the-svg-fit-its-parent-box)
   - [3. Draw the sun path](#3-draw-the-sun-path)
@@ -11,9 +11,12 @@
   - [5. JS datetime format converting](#5-js-datetime-format-converting)
   - [6. Use SVG Gradients](#6-use-svg-gradients)
   - [7. ??? Question, I can only place 'f3, f2, f6, f4' in f1.](#7--question-i-can-only-place-f3-f2-f6-f4-in-f1)
+  - [8. Add new line to svg using js](#8-add-new-line-to-svg-using-js)
 
 <!-- /TOC -->
 <!-- /TOC -->
+
+> Note: `500` in width and `200` in height is hard-coded.
 
 ## 1. Coordinate system
 
@@ -76,6 +79,8 @@ M x1,y1 x2,y2 ....
 ```
 
 ## 5. Color settings
+
+Reference: ColorNames https://www.w3.org/TR/SVG11/types.html#ColorKeywords
 
 ```css
 day sky #223d5d
@@ -170,4 +175,42 @@ function f1_fetchSunData() {
       f4_updateSunXY();
     });
 }
+```
+
+## 8. Add new line to svg using js
+
+The two code snippnet have same effect.
+
+```js
+// Add vertical reference lines at x = 0, 1/4T, 1/2T, 3/4T, 1T
+function f5_addGridLines() {
+  let svg = document.querySelector("svg");
+  let T = 24 * 60; // Full period (1440 minutes)
+  let svgWidth = 500; // SVG width in pixels
+  let positions = [0, 1 / 4, 1 / 2, 3 / 4, 1].map((p) => p * svgWidth);
+
+  positions.forEach((x) => {
+    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", x);
+    line.setAttribute("y1", 0);
+    line.setAttribute("x2", x);
+    line.setAttribute("y2", 200);
+    line.setAttribute("stroke", "#414144");
+    line.setAttribute("stroke-width", "1");
+    svg.appendChild(line);
+  });
+}
+```
+
+```html
+<svg id="sun-svg" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+  <rect id="svg-sky" x="0" y="0" width="500" height="100" fill="#1e2026" />
+  <rect id="svg-gnd" x="0" y="100" width="500" height="100" fill="#1c1c1e" />
+  <line id="svg-hline" x1="0" y1="100" x2="500" y2="100" stroke="#797d86" stroke-width="2" />
+  <line id="svg-vline1" x1="0" y1="0" x2="0" y2="200" stroke="#414144" stroke-width="1" />
+  <line id="svg-vline2" x1="125" y1="0" x2="125" y2="200" stroke="#414144" stroke-width="1" />
+  <line id="svg-vline3" x1="250" y1="0" x2="250" y2="200" stroke="#414144" stroke-width="1" />
+  <line id="svg-vline4" x1="375" y1="0" x2="375" y2="200" stroke="#414144" stroke-width="1" />
+  <line id="svg-vline4" x1="500" y1="0" x2="500" y2="200" stroke="#414144" stroke-width="1" />
+</svg>
 ```

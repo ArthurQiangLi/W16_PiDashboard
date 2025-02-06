@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   f1_fetchSunData();
-  f5_addGridLines();
+  // f5_addGridLines();
   // Fetch sun data every 30 seconds
   setInterval(f7_updatePeriodically, 5000); // 30,000 milliseconds = 30 seconds
 });
@@ -86,23 +86,23 @@ function f2_generateSunPath() {
 }
 
 // Add vertical reference lines at x = 0, 1/4T, 1/2T, 3/4T, 1T
-function f5_addGridLines() {
-  let svg = document.querySelector("svg");
-  let T = 24 * 60; // Full period (1440 minutes)
-  let svgWidth = 500; // SVG width in pixels
-  let positions = [0, 1 / 4, 1 / 2, 3 / 4, 1].map((p) => p * svgWidth);
+// function f5_addGridLines() {
+//   let svg = document.querySelector("svg");
+//   let T = 24 * 60; // Full period (1440 minutes)
+//   let svgWidth = 500; // SVG width in pixels
+//   let positions = [0, 1 / 4, 1 / 2, 3 / 4, 1].map((p) => p * svgWidth);
 
-  positions.forEach((x) => {
-    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", x);
-    line.setAttribute("y1", 0);
-    line.setAttribute("x2", x);
-    line.setAttribute("y2", 200);
-    line.setAttribute("stroke", "#414144");
-    line.setAttribute("stroke-width", "1");
-    svg.appendChild(line);
-  });
-}
+//   positions.forEach((x) => {
+//     let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+//     line.setAttribute("x1", x);
+//     line.setAttribute("y1", 0);
+//     line.setAttribute("x2", x);
+//     line.setAttribute("y2", 200);
+//     line.setAttribute("stroke", "#414144");
+//     line.setAttribute("stroke-width", "1");
+//     svg.appendChild(line);
+//   });
+// }
 
 function f6_adjustHorizonSky(now_m) {
   let hor = document.getElementById("svg-hline");
