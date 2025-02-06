@@ -15,6 +15,7 @@ function f1_fetchSunData() {
       g_sunData = data; // Store data globally
       f3_calcNoonShift(g_sunData.solar_noon);
       f2_generateSunPath(); // Draw the trajectory
+      f6_adjustHorizonSky(f4_cvtHhmmToMinutes(data.current_time));
     });
 }
 
@@ -108,19 +109,27 @@ function f6_adjustHorizonSky(now_m) {
   let hor = document.getElementById("svg-hline");
   let sky = document.getElementById("svg-sky");
   let gnd = document.getElementById("svg-gnd");
+  let sunrise = document.getElementById("svg-sunrise");
+  let sunset = document.getElementById("svg-sunset");
   const sunrise_m = f4_cvtHhmmToMinutes(g_sunData.sunrise); //get sunrise t-minutes
   const sunset_m = f4_cvtHhmmToMinutes(g_sunData.sunset); //get sunset t-minutes
-  let { x, y } = calcSunXY(sunrise_m);
+  let sunriseXY = calcSunXY(sunrise_m);
+  let sunsetXY = calcSunXY(sunset_m);
   // console.log("hor:", x, y);
-  hor.setAttribute("y1", y);
-  hor.setAttribute("y2", y);
-  sky.setAttribute("height", y);
-  gnd.setAttribute("y", y);
-  gnd.setAttribute("height", 200 - y);
+  hor.setAttribute("y1", sunriseXY.y);
+  hor.setAttribute("y2", sunriseXY.y);
+  sky.setAttribute("height", sunriseXY.y);
+  gnd.setAttribute("y", sunriseXY.y);
+  gnd.setAttribute("height", 200 - sunriseXY.y);
   if (sunrise_m < now_m && now_m < sunset_m) {
     //change sky color, set to bright when between sunrise and sunset.
     sky.setAttribute("fill", "#223d5d"); //is day time
   } else {
     sky.setAttribute("fill", "#1e2026"); //is night time
   }
+  //Add sunset sunrise time to svg
+  sunrise.textContent = g_sunData.sunrise;
+  sunrise.setAttribute("x", sunriseXY.x);
+  sunset.textContent = g_sunData.sunset;
+  sunset.setAttribute("x", sunsetXY.x);
 }
