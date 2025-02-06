@@ -6,10 +6,6 @@ body {
 }
 
 .card {
-  width: 600px;
-  height: 400px;
-  /* width: 90%; */
-  /* max-width: 600px; */
   padding: 20px;
   margin: 20px auto;
   background: #f9f9f9;
@@ -17,6 +13,5 @@ body {
 }
 
 svg {
-  width: auto; /* Make the SVG fully responsive */
-  height: auto;
+  background-color: blue;
 }

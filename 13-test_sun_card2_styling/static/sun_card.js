@@ -1,22 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetchSunData();
-  generateSunPath(); // Draw the trajectory
-  drawHorizonLine();
-  addReferenceLines();
+  f1_fetchSunData();
+  f5_addGridLines();
+  // Fetch sun data every 30 seconds
+  setInterval(f4_updateSunXY, 5000); // 30,000 milliseconds = 30 seconds
 });
 
-function fetchSunData() {
+let g_sunData = {}; // Global variable
+let g_noonShift = 0; // noon shift in minutes, if solar_noon=11:30, noon_shift=-30
+
+function f1_fetchSunData() {
   fetch("/sun-data")
     .then((response) => response.json())
     .then((data) => {
-      updateSunPosition(data.current_time, data.sunrise, data.sunset);
+      g_sunData = data; // Store data globally
+      f3_calcNoonShift(g_sunData.solar_noon);
+      f2_generateSunPath(); // Draw the trajectory
+      f6_adjustHorizon();
+      f4_updateSunXY();
     });
 }
 
 // Function to map time to an (x, y) coordinate on the SVG
-function getSunCoordinates(minutes) {
+function calcSunXY(minutes) {
   let T = 24 * 60; // Full period (1440 minutes)
-  let N = 30; // Phase shift (6 hours)
+  let N = g_noonShift; // Phase shift
   let A = 50; // Amplitude (height of the curve)
   let C = 100; // Offset (baseline height)
 
@@ -27,90 +34,57 @@ function getSunCoordinates(minutes) {
 }
 
 // Update the sun's position on the SVG
-function updateSunPosition(now) {
-  let sun = document.getElementById("sun");
+function f4_updateSunXY() {
+  let sun = document.getElementById("svg-sun");
 
-  let nowTime = new Date(`2025-02-05T${now}`);
-  let nowMinutes = nowTime.getHours() * 60 + nowTime.getMinutes();
+  // Get current time in "HH:MM" format
+  let now = new Date();
+  console.log("updateing at ", now);
+  let hhmm = now.toTimeString().slice(0, 5); // "HH:MM"
+  let nowMinutes = f4_cvt_HHMM_Minutes(hhmm);
 
-  let { x, y } = getSunCoordinates(nowMinutes);
+  let { x, y } = calcSunXY(nowMinutes);
 
   // Update sun's position on the SVG
   sun.setAttribute("cx", x);
   sun.setAttribute("cy", y);
 }
 
+function f4_cvt_HHMM_Minutes(HHMM_str) {
+  if (typeof HHMM_str !== "string" || !HHMM_str.includes(":")) {
+    console.error("Invalid input:", HHMM_str);
+    return 0;
+  }
+  const [hours, minutes] = HHMM_str.split(":").map(Number); // Split the input string into hours and minutes
+  // Convert input time to total minutes
+  const totalMinutes = hours * 60 + minutes;
+  return totalMinutes;
+}
+
+//if solar_noon is 12:30, then Phase shift is 30 (in minutes), if 11:30, then -30
+function f3_calcNoonShift(solar_noon) {
+  const m = f4_cvt_HHMM_Minutes(solar_noon);
+  const noonMinutes = 12 * 60;
+  g_noonShift = m - noonMinutes;
+  return g_noonShift;
+}
+
 // Generate the sine wave trajectory and update the SVG path
-function generateSunPath() {
+function f2_generateSunPath() {
   let T = 24 * 60; // Full period (1440 minutes)
   let path = document.getElementById("sun-path");
   let d = "M ";
 
   for (let t = 0; t <= T; t += 10) {
-    let { x, y } = getSunCoordinates(t);
+    let { x, y } = calcSunXY(t);
     d += `${x},${y} `;
   }
 
   path.setAttribute("d", d);
 }
 
-// function drawHorizonLine() {
-//   let svg = document.querySelector("svg");
-//   let horizonLine = document.createElementNS(
-//     "http://www.w3.org/2000/svg",
-//     "line"
-//   );
-
-//   horizonLine.setAttribute("x1", "0");
-//   horizonLine.setAttribute("y1", "110");
-//   horizonLine.setAttribute("x2", "500");
-//   horizonLine.setAttribute("y2", "110"); // Full height of SVG
-//   horizonLine.setAttribute("stroke", "blue");
-//   horizonLine.setAttribute("stroke-width", "2");
-
-//   svg.appendChild(horizonLine);
-// }
-
-// Draw the horizon line and fill colors above and below
-function drawHorizonLine() {
-  let svg = document.querySelector("svg");
-
-  // Create background for sky (blue)
-  let sky = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  sky.setAttribute("x", "0");
-  sky.setAttribute("y", "0");
-  sky.setAttribute("width", "500");
-  sky.setAttribute("height", "100"); // Above horizon
-  sky.setAttribute("fill", "blue");
-
-  // Create background for ground (grey)
-  let ground = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  ground.setAttribute("x", "0");
-  ground.setAttribute("y", "100");
-  ground.setAttribute("width", "500");
-  ground.setAttribute("height", "100"); // Below horizon
-  ground.setAttribute("fill", "grey");
-
-  // Create the horizon line
-  let horizonLine = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "line"
-  );
-  horizonLine.setAttribute("x1", "0");
-  horizonLine.setAttribute("y1", "100");
-  horizonLine.setAttribute("x2", "500");
-  horizonLine.setAttribute("y2", "100");
-  horizonLine.setAttribute("stroke", "black");
-  horizonLine.setAttribute("stroke-width", "2");
-
-  // Append elements to SVG (ensure correct order: sky → ground → horizon)
-  svg.prepend(sky);
-  svg.prepend(ground);
-  svg.appendChild(horizonLine);
-}
-
 // Add vertical reference lines at x = 0, 1/4T, 1/2T, 3/4T, 1T
-function addReferenceLines() {
+function f5_addGridLines() {
   let svg = document.querySelector("svg");
   let T = 24 * 60; // Full period (1440 minutes)
   let svgWidth = 500; // SVG width in pixels
@@ -122,9 +96,22 @@ function addReferenceLines() {
     line.setAttribute("y1", 0);
     line.setAttribute("x2", x);
     line.setAttribute("y2", 200);
-    line.setAttribute("stroke", "red");
+    line.setAttribute("stroke", "#414144");
     line.setAttribute("stroke-width", "1");
-    line.setAttribute("stroke-width", "1"); // Dashed lines for visibility
     svg.appendChild(line);
   });
+}
+
+function f6_adjustHorizon() {
+  let hor = document.getElementById("svg-hline");
+  let sky = document.getElementById("svg-sky");
+  let gnd = document.getElementById("svg-gnd");
+  const minutes = f4_cvt_HHMM_Minutes(g_sunData.sunrise);
+  let { x, y } = calcSunXY(minutes);
+  // console.log("hor:", x, y);
+  hor.setAttribute("y1", y);
+  hor.setAttribute("y2", y);
+  sky.setAttribute("height", y);
+  gnd.setAttribute("y", y);
+  gnd.setAttribute("height", 200 - y);
 }

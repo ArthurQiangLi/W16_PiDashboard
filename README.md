@@ -10,7 +10,11 @@ working on build a dashboard webpage on a Rasberry Pi, it has datetime and weath
 4. https://www.smarty.ninja/ecosystems-en/home-assistant/tracking-sun-and-moon-in-home-assistant/#google_vignette
 5. https://weather.wilmslowastro.com/index.php
 
-### Reference 1. hass (home assistant sun card)
+### Reference 1. Apple weather app
+
+![apple weather app](./90-markdown-resources/7-apple%20weather%20app%20example.png)
+
+### Reference 2. hass (home assistant sun card)
 
 Link : https://github.com/AitorDB/home-assistant-sun-card
 
