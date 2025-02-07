@@ -11,3 +11,5 @@
 ![forecast card structure](./90-markdown-resources/152-forecast%20card%20structure.png)
 
 ## 3. Weather card
+
+![log9](./90-markdown-resources/log9.png)

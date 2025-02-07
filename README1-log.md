@@ -21,3 +21,5 @@ Planning the layout for weather and forcasts.
 ![log7](./90-markdown-resources/log7.png)
 
 ![log8](./90-markdown-resources/log8.png)
+
+![log9](./90-markdown-resources/log9.png)
