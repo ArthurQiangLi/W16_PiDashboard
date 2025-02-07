@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+    <style>
+      .weather-grid {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: repeat(6, auto);
+        gap: 5px;
+        width: 600px;
+        text-align: center;
+        border: 1px solid black;
+      }
+      .grid-item {
+        padding: 10px;
+        border: 1px solid gray;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .header {
+        background-color: lightgray;
+      }
+      .icon {
+        width: 40px;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>5-Day Weather Forecast</h2>
+    <div class="weather-grid" id="weatherGrid"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
