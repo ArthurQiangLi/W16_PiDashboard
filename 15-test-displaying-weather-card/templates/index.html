@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Pi Dashboard</title>
+    <style>
+      :root {
+        /* --dashboard-width: 1400px; */
+        --card1-width: 500px;
+        --card3-width: 300px;
+      }
+      * {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: 1px dashed black;
+      }
+      body {
+        display: flex; /* display the 'page-body' in this mode */
+        justify-content: center;
+      }
+
+      .page-body {
+        /* background-color: rgb(30, 30, 60); */
+        background-color: aquamarine;
+        width: 1280px;
+        height: 1024px;
+        display: grid;
+        grid-template-rows: min-content auto auto;
+      }
+
+      h1 {
+        margin: 20px;
+        font-size: 40px;
+        color: white;
+        text-align: center;
+      }
+      .board-sun {
+        /* height: 300px; */
+        background-color: honeydew;
+        margin: 10px;
+      }
+      .board-group2 {
+        background-color: beige;
+        margin: 0 10px 10px 10px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+      }
+      .board-weather {
+        background-color: lightblue;
+      }
+      .board-forecast {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-body">
+      <h1>2025-02-06 Thursday</h1>
+      <div class="board-sun">suncard</div>
+      <div class="board-group2">
+        <div class="board-weather">current weather</div>
+        <div class="board-forecast">forecast</div>
+      </div>
+    </div>
+  </body>
+</html>

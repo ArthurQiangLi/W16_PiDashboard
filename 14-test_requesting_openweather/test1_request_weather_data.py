@@ -10,7 +10,7 @@ LOCATION = "Kitchener,CA"
 LAT, LON = 43.47053, -80.56186  # Residence at U of Waterloo
 WEATHER_API_KEY = "7a8fdd951ab780e11ad83ac773f07e7f" #don't use my key, register it yourself
 WEATHER_API_URL1 = "http://api.openweathermap.org/data/2.5/weather"
-PARAMS1 = {"q": LOCATION,
+PARAMS1 = {"lon": LON, "lat":LAT,
             "appid": WEATHER_API_KEY,
             "units": "metric"}
 WEATHER_API_URL2 = "http://api.openweathermap.org/data/2.5/forecast"
@@ -58,6 +58,6 @@ def fetch_openweather4_map():
 if __name__ == "__main__":
 
     fetch_openweather(WEATHER_API_URL1, PARAMS1)
-    fetch_openweather(WEATHER_API_URL2, PARAMS2)
-    fetch_openweather(WEATHER_API_URL3, PARAMS3)
-    fetch_openweather4_map()
+    # fetch_openweather(WEATHER_API_URL2, PARAMS2)
+    # fetch_openweather(WEATHER_API_URL3, PARAMS3)
+    # fetch_openweather4_map()

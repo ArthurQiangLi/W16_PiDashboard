@@ -12,4 +12,7 @@
 
 ## 2 [2025-02-06 17:58:42] requesting openweather data
 
-## 3 [] displaying weather data
+## 3 [2025-02-06 21:31:17] displaying weather data
+
+Planning the layout for weather and forcasts.
+![log5](./90-markdown-resources/log5.png)
