@@ -63,12 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // First row 2~9: Time headers
   times8.forEach((time) => {
-    weatherGrid.appendChild(createGridItem(time, "header"));
+    weatherGrid.appendChild(createGridItem(time, "head"));
   });
 
   uniqueDates5.forEach((date) => {
     // Populate each row
-    weatherGrid.appendChild(createGridItem(date, "header")); // First column: Date
+    weatherGrid.appendChild(createGridItem(date, "head2")); // First column: Date
 
     // Fill in 8 forecastes, because 'times' length is 8.
     times8.forEach((time) => {
@@ -76,11 +76,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (forecast) {
         const content = `
                     <img class="icon" src="https://openweathermap.org/img/wn/${forecast.icon}@2x.png" alt="weather">
-                    ${forecast.temp}°C
+                    ${forecast.temp}°
                 `;
-        weatherGrid.appendChild(createGridItem(content));
+        weatherGrid.appendChild(createGridItem(content, "cell"));
       } else {
-        weatherGrid.appendChild(createGridItem("N/A"));
+        weatherGrid.appendChild(createGridItem("N/A", "cell"));
       }
     });
   });
