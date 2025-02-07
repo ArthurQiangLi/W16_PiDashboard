@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Forecast</title>
     <style>
+      .body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: 1px dashed black;
+      }
       .weather-grid {
         display: grid;
         grid-template-columns: repeat(9, 1fr);
@@ -34,9 +41,10 @@
     </style>
   </head>
   <body>
-    <h2>5-Day Weather Forecast</h2>
-    <div class="weather-grid" id="weatherGrid"></div>
+    <div>
+      <div class="weather-grid" id="weatherGrid"></div>
 
-    <script src="script.js"></script>
+      <script src="script.js"></script>
+    </div>
   </body>
 </html>
