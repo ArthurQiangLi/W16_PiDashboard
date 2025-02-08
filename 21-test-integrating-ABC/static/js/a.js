@@ -159,5 +159,5 @@ function f6_adjustHorizonSky(now_m) {
   sunset.setAttribute("x", sunsetXY.x);
   //Add now time to svg
   sunnow.textContent = g_nowHHMMSS;
-  sunnow.setAttribute("x", nowXY.x);
+  sunnow.setAttribute("x", Math.min(nowXY.x, 380)); //no more than 380 to the right, make sure text is not cut-off.
 }

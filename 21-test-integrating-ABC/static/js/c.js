@@ -42,12 +42,12 @@ function updateBoxC(data) {
       const forecast = forecasts40.find((entry) => entry.dt_txt.includes(`${date} ${time}:00:00`));
       if (forecast) {
         const content = `
-                      <img class="grid-item icon" src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="weather">
-                      ${forecast.main.temp}°
+                      <img class="grid-item icon" src="static/icons/${forecast.weather[0].icon.replace("n", "d")}.png" alt="weather">
+                      ${Math.round(forecast.main.temp)}°
                   `;
         weatherGrid.appendChild(createGridItem(content, "cell"));
       } else {
-        weatherGrid.appendChild(createGridItem("N/A", "cell"));
+        weatherGrid.appendChild(createGridItem("", "cell"));
       }
     });
   });

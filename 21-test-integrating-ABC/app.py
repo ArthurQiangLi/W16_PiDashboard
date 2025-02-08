@@ -19,7 +19,7 @@ def get_data1():
 def get_data2():
     d = fetch_openweather(WEATHER_API_URL2, PARAMS2)
     print(f"### data2 len = {d['cnt']}, true len={len(d['list'])}") #data['main']['humidity']
-    print(d)
+    # print(d)
     return jsonify(d)              
       
 ##############################################################

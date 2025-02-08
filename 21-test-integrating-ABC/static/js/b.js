@@ -21,7 +21,8 @@ fetchData2();
 
 function update_id1(data) {
   const iconCode = data.weather[0].icon; // Extract the icon code
-  const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`; // Construct the full URL
+  const iconUrl = `static/icons/${data.weather[0].icon.replace("n", "d")}.png`;
+  //`https://openweathermap.org/img/wn/${iconCode}@2x.png`; // Construct the full URL
   document.getElementById("id1-icon").src = iconUrl; // Set the image source
 }
 
@@ -36,15 +37,17 @@ function update_id3(data) {
 }
 
 function update_id4(data) {
-  document.getElementById("id4-temp").textContent = data.main.temp;
+  document.getElementById("id4-temp").textContent = Math.round(data.main.temp);
 }
 
 function update_id5(data) {
-  document.getElementById("id5-feels").textContent = `Feels: ${data.main.feels_like}`;
+  document.getElementById("id5-feels").textContent = `Feels: ${data.main.feels_like.toFixed(0)}`;
 }
 
 function update_id6(data) {
-  document.getElementById("id6-temp-mimmax").textContent = `H:${data.main.temp_max} L:${data.main.temp_min} Hm:${data.main.humidity}`;
+  document.getElementById("id6-temp-mimmax").textContent = `H:${data.main.temp_max.toFixed(0)} L:${data.main.temp_min.toFixed(0)} Hm:${
+    data.main.humidity
+  }`;
 }
 
 function update_id7(data) {
