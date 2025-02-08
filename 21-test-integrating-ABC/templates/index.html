@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Pi Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+
+  <body>
+    <div class="board-container">
+      <h1 id="id-dateday">2025-02-07 Friday</h1>
+      <div class="board-a">{% include 'a.html' %}</div>
+      <div class="board-group2">
+        <div class="board-b">{% include 'b.html' %}</div>
+        <div class="board-c">{% include 'c.html' %}</div>
+      </div>
+    </div>
+    <!-- Load global.js FIRST so other JS files can use the variables -->
+    <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/b.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/a.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/c.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/theme.js') }}"></script> -->
+  </body>
+</html>

@@ -1,0 +1,123 @@
+:root {
+  --dkblue: rgb(23, 23, 23);
+  --mdblue: rgb(38, 38, 38);
+  --margin1: 10px;
+}
+* {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px dashed black; */
+}
+body {
+  display: flex; /* display the 'page-body' in this mode */
+  justify-content: center;
+}
+.board-container {
+  padding: 15px;
+  background-color: var(--dkblue);
+  /* border: 2px dashed yellow; */
+  width: 1280px;
+  height: 1024px;
+  display: grid;
+  grid-template-rows: min-content 1fr 1fr;
+  row-gap: 10px;
+}
+h1 {
+  /* margin: var(--margin1); */
+  font-size: 40px;
+  color: white;
+  text-align: center;
+  /* height: 100%; */
+}
+.board-group2 {
+  /* margin: 0 10px 10px 10px; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+/* a box ########################################## */
+/* .board-a {
+
+} */
+svg {
+  width: 100%;
+  height: 100%;
+  /* border-color: lightgreen; */
+}
+
+/* b box ########################################## */
+.board-b {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  gap: var(--margin1);
+
+  color: white;
+  text-align: center;
+  font-size: 20pt;
+  /* border-color: red; */
+}
+.weather-board1-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+  background-color: var(--mdblue);
+}
+#id4-temp {
+  font-size: 60pt;
+}
+
+/* c box ########################################## */
+
+/* .board-c {
+  border-color: red;
+} */
+
+.weather-grid {
+  padding: 10px;
+  background-color: var(--mdblue);
+  color: white;
+  /* border-color: aqua; */
+
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(6, auto);
+  /* align-content: stretch; */
+  height: 100%;
+  /* row-gap: 10px; */
+  text-align: center;
+}
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.grid-item.head {
+  font-size: 15pt;
+  font-weight: bold;
+}
+.grid-item.head2 {
+  font-size: 18pt;
+  font-weight: bold;
+  border-bottom: 2px solid grey;
+}
+.grid-item.cell {
+  border-bottom: 2px solid grey;
+  font-size: 15pt;
+}
+
+.grid-item.icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* ########################################## */
+
+/* ########################################## */

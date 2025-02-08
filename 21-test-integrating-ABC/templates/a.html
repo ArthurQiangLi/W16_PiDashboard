@@ -1,0 +1,32 @@
+<svg id="sun-svg" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid meet">
+  <rect id="svg-sky" x="0" y="0" width="500" height="100" fill="blue" />
+  <rect id="svg-gnd" x="0" y="100" width="500" height="100" fill="#1c1c1e" />
+  <line id="svg-hline" x1="0" y1="100" x2="500" y2="100" stroke="#797d86" stroke-width="2" />
+  <!-- <line id="svg-vline1" x1="0" y1="0" x2="0" y2="200" stroke="#414144" stroke-width="1" /> -->
+  <line id="svg-vline2" x1="125" y1="0" x2="125" y2="200" stroke="#414144" stroke-width="1" />
+  <line id="svg-vline3" x1="250" y1="0" x2="250" y2="200" stroke="#414144" stroke-width="1" />
+  <line id="svg-vline4" x1="375" y1="0" x2="375" y2="200" stroke="#414144" stroke-width="1" />
+  <!-- <line id="svg-vline4" x1="500" y1="0" x2="500" y2="200" stroke="#414144" stroke-width="1" /> -->
+  <text id="svg-sunrise" x="125" y="195" font-size="12px" fill="white"></text>
+  <text id="svg-sunset" x="375" y="195" font-size="12px" fill="white"></text>
+  <text id="svg-sunnow" x="250" y="25" font-size="30px" fill="white"></text>
+
+  <path id="sun-path" stroke="#dadadc" fill="none" stroke-width="2" />
+
+  <!-- Define a radial gradient -->
+  <defs>
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="white" />
+      <stop offset="30%" stop-color="white" stop-opacity="1" />
+      <stop offset="31%" stop-color="white" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="white" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Apply the gradient to a circle -->
+  <circle id="svg-sun" cx="-20" cy="-20" r="15" fill="url(#glowGradient)"></circle>
+  <!-- <circle id="sun1" cx="390" cy="100" r="5" fill="white"></circle> -->
+</svg>
+
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/a.css') }}" />
+<script src="{{ url_for('static', filename='js/a.js') }}" defer></script> -->
