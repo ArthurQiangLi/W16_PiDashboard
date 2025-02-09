@@ -14,9 +14,7 @@ def get_sun_data():
         "sunrise": "07:32",
         "sunset": "17:41",
         "solar_noon": "12:36",
-        # "dawn": "04:24",
-        # "dusk": "21:30",
-        # "current_time": datetime.now().strftime("%H:%M")
+
     })
 
 if __name__ == '__main__':

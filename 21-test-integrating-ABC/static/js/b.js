@@ -21,7 +21,7 @@ fetchData2();
 
 function update_id1(data) {
   const iconCode = data.weather[0].icon; // Extract the icon code
-  const iconUrl = `static/icons/${data.weather[0].icon.replace("n", "d")}.png`;
+  const iconUrl = `static/icons/${iconCode.replace("n", "d")}.png`;
   //`https://openweathermap.org/img/wn/${iconCode}@2x.png`; // Construct the full URL
   document.getElementById("id1-icon").src = iconUrl; // Set the image source
 }
@@ -55,7 +55,7 @@ function update_id7(data) {
   if (data.rain && data.rain["1h"] !== undefined) {
     precElement.textContent = `Rain: ${data.rain["1h"]}mm/h`;
   } else if (data.snow && data.snow["1h"] !== undefined) {
-    precElement.textContent = `Snow: ${data.sow["1h"]}mm/h`;
+    precElement.textContent = `Snow: ${data.snow["1h"]}mm/h`;
   } else {
     precElement.textContent = "No Precipitation";
   }
@@ -96,6 +96,6 @@ function updateSunData(data) {
     g_sunData.solar_noon = convertToLocalTime(solarNoonTimestamp, timezoneOffset);
 
     g_sunData.timezone = timezoneOffset;
-    // console.log(g_sunData);
+    //console.log(g_sunData);
   }
 }

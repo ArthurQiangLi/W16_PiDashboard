@@ -15,27 +15,27 @@ body {
   justify-content: center;
 }
 .board-container {
-  padding: 15px;
+  padding: 10px;
   background-color: var(--dkblue);
   /* border: 2px dashed yellow; */
   width: 1280px;
   height: 1024px;
   display: grid;
-  grid-template-rows: min-content 1fr 1fr;
-  row-gap: 10px;
+  grid-template-rows: min-content auto auto;
+  align-content: space-between;
 }
 h1 {
   /* margin: var(--margin1); */
   font-size: 40px;
   color: white;
-  text-align: center;
+  text-align: left;
   /* height: 100%; */
 }
 .board-group2 {
   /* margin: 0 10px 10px 10px; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: var(--margin1);
 }
 
 /* a box ########################################## */
@@ -43,6 +43,7 @@ h1 {
 
 } */
 svg {
+  /* padding: 10px; */
   width: 100%;
   height: 100%;
   /* border-color: lightgreen; */
@@ -106,10 +107,10 @@ svg {
 .grid-item.head2 {
   font-size: 18pt;
   font-weight: bold;
-  border-bottom: 2px solid grey;
+  border-top: 2px solid grey;
 }
 .grid-item.cell {
-  border-bottom: 2px solid grey;
+  border-top: 2px solid grey;
   font-size: 15pt;
 }
 

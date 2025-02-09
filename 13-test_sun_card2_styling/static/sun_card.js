@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   f1_fetchSunData();
-  // f5_addGridLines();
-  // Fetch sun data every 30 seconds
-  setInterval(f7_updatePeriodically, 5000); // 30,000 milliseconds = 30 seconds
+  setInterval(f7_updatePeriodically, 1000); // in ms
 });
 
 let g_sunData = {}; // Global variable
 let g_noonShift = 0; // noon shift in minutes, if solar_noon=11:30, noon_shift=-30
+let g_HorizonY = 100;
 
 function f1_fetchSunData() {
   fetch("/sun-data")
@@ -21,12 +20,12 @@ function f1_fetchSunData() {
 
 function f7_updatePeriodically() {
   let now = new Date();
-  // console.log("updateing at ", now);
   let hhmm = now.toTimeString().slice(0, 5); // "HH:MM"
   let nowMinutes = f5_cvtHhmmToMinutes(hhmm);
 
   f4_updateSunXY(nowMinutes);
   f6_adjustHorizonSky(nowMinutes);
+  f5_adjustHourlyGridLines();
 }
 
 // Function to map time to an (x, y) coordinate on the SVG
@@ -86,24 +85,14 @@ function f2_generateSunPath() {
   path.setAttribute("d", d);
 }
 
-// Add vertical reference lines at x = 0, 1/4T, 1/2T, 3/4T, 1T
-// function f5_addGridLines() {
-//   let svg = document.querySelector("svg");
-//   let T = 24 * 60; // Full period (1440 minutes)
-//   let svgWidth = 500; // SVG width in pixels
-//   let positions = [0, 1 / 4, 1 / 2, 3 / 4, 1].map((p) => p * svgWidth);
-
-//   positions.forEach((x) => {
-//     let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-//     line.setAttribute("x1", x);
-//     line.setAttribute("y1", 0);
-//     line.setAttribute("x2", x);
-//     line.setAttribute("y2", 200);
-//     line.setAttribute("stroke", "#414144");
-//     line.setAttribute("stroke-width", "1");
-//     svg.appendChild(line);
-//   });
-// }
+function f5_adjustHourlyGridLines() {
+  let minor = document.getElementById("hourly-line");
+  let major = document.getElementById("major-hour-line");
+  minor.setAttribute("y1", g_HorizonY + 2);
+  minor.setAttribute("y2", g_HorizonY + 5);
+  major.setAttribute("y1", g_HorizonY + 2);
+  major.setAttribute("y2", g_HorizonY + 5);
+}
 
 function f6_adjustHorizonSky(now_m) {
   let hor = document.getElementById("svg-hline");
@@ -116,6 +105,7 @@ function f6_adjustHorizonSky(now_m) {
   let sunriseXY = f8_calcSunXY(sunrise_m);
   let sunsetXY = f8_calcSunXY(sunset_m);
   // console.log("hor:", x, y);
+  g_HorizonY = sunriseXY.y;
   hor.setAttribute("y1", sunriseXY.y);
   hor.setAttribute("y2", sunriseXY.y);
   sky.setAttribute("height", sunriseXY.y);

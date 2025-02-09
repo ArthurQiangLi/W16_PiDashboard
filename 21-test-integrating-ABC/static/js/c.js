@@ -43,7 +43,7 @@ function updateBoxC(data) {
       if (forecast) {
         const content = `
                       <img class="grid-item icon" src="static/icons/${forecast.weather[0].icon.replace("n", "d")}.png" alt="weather">
-                      ${Math.round(forecast.main.temp)}°
+                      ${Math.round(forecast.main.temp)}
                   `;
         weatherGrid.appendChild(createGridItem(content, "cell"));
       } else {
