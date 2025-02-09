@@ -40,12 +40,12 @@ Effect of running on a 19-inch old screen .
 
 ## 1.2. How I build it/ How does it work
 
-### Technology stack
+### 1.2.1. Technology stack
 
 ![222](./90-markdown-resources/222-technology-stack.png)
 I use Flask+python for the backend, use pure css/html/js for the front end. The sun-card is dranwn using svg. The weather data is fetched from Openweathermap.com with a free account.
 
-### Control flow / Data flow
+### 1.2.2. Control flow / Data flow
 
 ![223](./90-markdown-resources/223-control-data-flow.png)
 
@@ -66,3 +66,12 @@ When page is loaded:
 - B and C run to get data without delay.
 
 ---EndofFile---
+
+## Development notes
+
+1. [README1-log.md](./README1-log.md)
+2. [README2-draw-sun-card-svg.md](./README2-draw-sun-card-svg.md)
+3. [README2_get_sunset_time.md](./README2_get_sunset_time.md)
+4. [README3-request-openweather.md](./README3-request-openweather.md)
+5. [README4-layout-weather-card.md](./README4-layout-weather%20card.md)
+6. [README5-integrating-ABC.md](./README5-integrating-ABC.md)
