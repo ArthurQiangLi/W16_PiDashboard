@@ -21,32 +21,26 @@ body {
   width: 1280px;
   height: 1024px;
   display: grid;
-  grid-template-rows: min-content auto auto;
+  grid-template-rows: min-content auto 1fr;
   align-content: space-between;
 }
 h1 {
   /* margin: var(--margin1); */
-  font-size: 40px;
+  font-size: 50px;
   color: white;
   text-align: left;
-  /* height: 100%; */
 }
 .board-group2 {
-  /* margin: 0 10px 10px 10px; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--margin1);
 }
 
 /* a box ########################################## */
-/* .board-a {
 
-} */
 svg {
-  /* padding: 10px; */
   width: 100%;
-  height: 100%;
-  /* border-color: lightgreen; */
+  margin-bottom: 5px;
 }
 
 /* b box ########################################## */

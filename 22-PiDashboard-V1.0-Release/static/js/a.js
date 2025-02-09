@@ -115,7 +115,7 @@ function f03_adjustHorizonSky_TimeAxis(now_m, noonshift_m, sunriseHHMM, sunsetHH
     //change sky color, set to bright when between sunrise and sunset.
     sky.setAttribute("fill", "blue"); //is day time
   } else {
-    sky.setAttribute("fill", "navy"); //is night time
+    sky.setAttribute("fill", "#000030"); //is night time
   }
   //Add sunset sunrise time to svg
   sunrise.textContent = sunriseHHMM;

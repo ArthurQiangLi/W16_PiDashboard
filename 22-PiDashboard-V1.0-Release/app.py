@@ -23,7 +23,7 @@ def get_data2():
     return jsonify(d)              
       
 ##############################################################
-LAT, LON = 43.47053, -80.56186  # Residence at U of Waterloo
+LAT, LON = 43.473785, -80.540531  #U of Waterloo
 WEATHER_API_KEY = "7a8fdd951ab780e11ad83ac773f07e7f" #don't use my key, register it yourself
 WEATHER_API_URL1 = "http://api.openweathermap.org/data/2.5/weather"
 PARAMS1 = {"lon": LON, "lat":LAT,
