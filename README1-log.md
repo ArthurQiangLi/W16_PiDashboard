@@ -23,3 +23,16 @@ Planning the layout for weather and forcasts.
 ![log8](./90-markdown-resources/log8.png)
 
 ![log9](./90-markdown-resources/log9.png)
+
+## 4 Integrating 3 parts together [2025-02-07]
+
+![log](./90-markdown-resources/log11.png)
+![log](./90-markdown-resources/log12.png)
+![log](./90-markdown-resources/log13.png)
+![log](./90-markdown-resources/log14.png)
+![log](./90-markdown-resources/log15.png)
+![log](./90-markdown-resources/log16.png)
+
+### Final effect
+
+![log](./90-markdown-resources/log17.png)

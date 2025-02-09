@@ -18,7 +18,7 @@ def get_data1():
 @app.route('/data2')
 def get_data2():
     d = fetch_openweather(WEATHER_API_URL2, PARAMS2)
-    print(f"### data2 len = {d['cnt']}, true len={len(d['list'])}") #data['main']['humidity']
+    # print(f"### data2 len = {d['cnt']}, true len={len(d['list'])}") #data['main']['humidity']
     # print(d)
     return jsonify(d)              
       
@@ -48,5 +48,5 @@ def fetch_openweather(api, params):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
 

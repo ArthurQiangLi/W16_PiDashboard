@@ -5,7 +5,7 @@ function fetchData2() {
       updateBoxC(data);
     });
 }
-setInterval(fetchData2, 55000);
+setInterval(fetchData2, 5 * 60 * 1000);
 fetchData2();
 
 // Hardcoded JSON data with 40 data points (5 days × 8 time slots)

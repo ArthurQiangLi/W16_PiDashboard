@@ -12,7 +12,7 @@
     - [1.1.3. Requesting maps](#113-requesting-maps)
     - [1.1.4. Testing API getting air quality](#114-testing-api-getting-air-quality)
     - [1.1.5. testing API5 geo data](#115-testing-api5-geo-data)
-  - [1.2. The website offers icons](#12-the-website-offers-icons)
+  - [1.2. This website offers icons](#12-this-website-offers-icons)
 
 ## 1.1. Free account can access 5 APIs
 
@@ -97,6 +97,6 @@ Data is simple, the API document has instruction about how to understand the num
 
 It's about the name texts in different languages, it's an online tool might be useful for me 100 years later.
 
-## 1.2. The website offers icons
+## 1.2. This website offers icons
 
 https://openweathermap.org/weather-conditions#Icon-list

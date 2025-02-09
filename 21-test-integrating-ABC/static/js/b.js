@@ -16,7 +16,7 @@ function fetchData2() {
       // checkTheme(data.sunrise, data.sunset);
     });
 }
-setInterval(fetchData2, 60000);
+setInterval(fetchData2, 3 * 60 * 1000);
 fetchData2();
 
 function update_id1(data) {

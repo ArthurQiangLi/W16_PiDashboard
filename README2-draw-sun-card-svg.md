@@ -1,22 +1,28 @@
-# Drawing sun-card svg on 500x200 coordinate
+# 1. Drawing sun-card svg on 500x200 coordinate
 
-<!-- TOC -->
+In this project I leanred how to use svg to draw the sun-card, I put the detailed notes in this .md file.
 
-- [Drawing sun-card svg on 500x200 coordinate](#drawing-sun-card-svg-on-500x200-coordinate)
-  - [`sun-card.js` Structure](#sun-cardjs-structure)
-  - [1. Coordinate system](#1-coordinate-system)
-  - [2. How the svg fit it's parent box](#2-how-the-svg-fit-its-parent-box)
-  - [3. Draw the sun path](#3-draw-the-sun-path)
-  - [4. `sun-path` data looks like](#4-sun-path-data-looks-like)
-  - [5. Color settings](#5-color-settings)
-  - [5. JS datetime format converting](#5-js-datetime-format-converting)
-  - [6. Use SVG Gradients](#6-use-svg-gradients)
-  - [7. ??? Question, I can only place 'f3, f2, f6, f4' in f1.](#7--question-i-can-only-place-f3-f2-f6-f4-in-f1)
-  - [8. Add new line to svg using js](#8-add-new-line-to-svg-using-js)
+<!-- TOC depthFrom:2 orderedList:true -->
+
+- [1. Drawing sun-card svg on 500x200 coordinate](#1-drawing-sun-card-svg-on-500x200-coordinate)
+  - [1.1. sun-card.js Structure](#11-sun-cardjs-structure)
+    - [1.1.1. A new structure in \[2025-02-07\]](#111-a-new-structure-in-2025-02-07)
+  - [1.2. Coordinate system](#12-coordinate-system)
+  - [1.3. How the svg fit it's parent box](#13-how-the-svg-fit-its-parent-box)
+  - [1.4. Draw the sun path](#14-draw-the-sun-path)
+    - [1.4.1. References](#141-references)
+    - [1.4.2. Reference 1. Apple weather app](#142-reference-1-apple-weather-app)
+    - [1.4.3. Reference 2. hass (home assistant sun card)](#143-reference-2-hass-home-assistant-sun-card)
+  - [1.5. `sun-path` data looks like](#15-sun-path-data-looks-like)
+  - [1.6. Color settings](#16-color-settings)
+  - [1.7. JS datetime format converting](#17-js-datetime-format-converting)
+  - [1.8. Use SVG Gradients](#18-use-svg-gradients)
+  - [1.9. Question, I can only place 'f3, f2, f6, f4' in f1 in this case.](#19-question-i-can-only-place-f3-f2-f6-f4-in-f1-in-this-case)
+  - [1.10. Add new line to svg using js](#110-add-new-line-to-svg-using-js)
 
 <!-- /TOC -->
 
-## `sun-card.js` Structure
+## 1.1. sun-card.js Structure
 
 Suncard structure:
 ![sun-card structure](./90-markdown-resources/13-suncard%20js%20structure.png)
@@ -25,13 +31,25 @@ Suncard svg layout:
 
 > Note: `500` in width and `200` in height is hard-coded.
 
-## 1. Coordinate system
+### 1.1.1. A new structure in [2025-02-07]
+
+I have a new version for this part. I add a time axis (time ruler) at the horizon line. In this way, it's more clear to show the 24 hours in a day and the association with the solar movement. I believe this is a wonderful idea and I don't see anywhere else has this design.
+
+1. Remove all local global variables
+2. Refacotor functions into only 3.
+3. Divide function into two categories: slow, fast.
+   The UI layout:
+   ![](./90-markdown-resources/131-new-layout.png)
+   The js code structure:
+   ![](./90-markdown-resources/132-new-code-structure.png)
+
+## 1.2. Coordinate system
 
 `viewBox="0 0 500 200"` as "x1, y1, width, height", where the (x1, y1) is the top-left corner of the SVG's coordinate system.
 
 ![Alt text](./90-markdown-resources/8-svg-coordinate-system.png)
 
-## 2. How the svg fit it's parent box
+## 1.3. How the svg fit it's parent box
 
 The parent container may have a different aspect ratio other than svg's `viewBox`.
 `preserveAspectRatio="align meetOrSlice"
@@ -44,7 +62,7 @@ The parent container may have a different aspect ratio other than svg's `viewBox
 | **`xMaxYMax meet`**   | Aligns to **bottom-right**, scales proportionally.                              |
 | **`xMidYMid slice`**  | Fills the container completely, but **might crop** parts of the SVG.            |
 
-## 3. Draw the sun path
+## 1.4. Draw the sun path
 
 ```py
 import numpy as np
@@ -77,7 +95,32 @@ plt.show()
 
 ![Alt text](./90-markdown-resources/9-sine-wave-for-sun-path.png)
 
-## 4. `sun-path` data looks like
+### 1.4.1. References
+
+1. https://www.timeanddate.com/sun/canada/waterloo
+2. https://andrewmarsh.com/apps/releases/sunpath2d.html
+3. https://kitchenerwaterloo.weatherstats.ca/
+4. https://www.smarty.ninja/ecosystems-en/home-assistant/tracking-sun-and-moon-in-home-assistant/#google_vignette
+5. https://weather.wilmslowastro.com/index.php
+
+### 1.4.2. Reference 1. Apple weather app
+
+![apple weather app](./90-markdown-resources/7-apple%20weather%20app%20example.png)
+
+### 1.4.3. Reference 2. hass (home assistant sun card)
+
+Link : https://github.com/AitorDB/home-assistant-sun-card
+
+| Day                                            | Night                                              |
+| ---------------------------------------------- | -------------------------------------------------- |
+| ![day](./90-markdown-resources/4-hass-day.png) | ![night](./90-markdown-resources/5-hass-night.png) |
+
+|                                                                        |                                                                     |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| **hass** is using a fixed Bezier curve. It's **NOT** my best choice.   | ![hass sun path](./90-markdown-resources/3-hass-sun-trajectory.png) |
+| Sine wave looks better: [https://www.desmos.com/calculator/nqfu5lxaij] | ![sine wave](./90-markdown-resources/15-sine-wave.png)              |
+
+## 1.5. `sun-path` data looks like
 
 ```
 M 0,50 20,48 40,45 60,42 80,38 100,33 120,28 140,22 160,16 180,10 200,5 220,3 240,1
@@ -85,7 +128,7 @@ M 0,50 20,48 40,45 60,42 80,38 100,33 120,28 140,22 160,16 180,10 200,5 220,3 24
 M x1,y1 x2,y2 ....
 ```
 
-## 5. Color settings
+## 1.6. Color settings
 
 Reference: ColorNames https://www.w3.org/TR/SVG11/types.html#ColorKeywords
 
@@ -97,7 +140,7 @@ grid #414144
 
 ```
 
-## 5. JS datetime format converting
+## 1.7. JS datetime format converting
 
 Converting these datetime formats <br>
 `"sunset": "2025-02-05T17:41:01-05:00",` or <br>
@@ -130,7 +173,7 @@ console.log(formatSunsetTime("2025-02-05T17:41:01-05:00")); // Output: "17:41"
 console.log(formatSunsetTime("5:41:01 PM")); // Output: "17:41"
 ```
 
-## 6. Use SVG Gradients
+## 1.8. Use SVG Gradients
 
 Here I use only one circle instead of two. what the trick here is the `30%` and `31%`.
 
@@ -155,7 +198,7 @@ After I add the `30%`, the edge of the sun is solid then.
 <!-- <circle id="sun1" cx="390" cy="100" r="5" fill="white"></circle> -->
 ```
 
-## 7. ??? Question, I can only place 'f3, f2, f6, f4' in f1.
+## 1.9. Question, I can only place 'f3, f2, f6, f4' in f1 in this case.
 
 Here is a problem, if I put `f3, f2, f6, f4` after f5, they won't work. I don't know why.
 [2025-02-06 10:34:39]
@@ -184,9 +227,11 @@ function f1_fetchSunData() {
 }
 ```
 
-## 8. Add new line to svg using js
+> [2025-02-09 13:33:52] The reason is that `fetch()` is asychronous and doesn't block the execution flow, the `.then` is excuted after receiving the response which is about 50ms later. That means if you put `f2(), f2() ...` after f5(), these functions will execute without valid data before `.then()` actually.
 
-The two code snippnet have same effect.
+## 1.10. Add new line to svg using js
+
+The two code snippnets have the same effect.
 
 ```js
 // Add vertical reference lines at x = 0, 1/4T, 1/2T, 3/4T, 1T
@@ -221,3 +266,5 @@ function f5_addGridLines() {
   <line id="svg-vline4" x1="500" y1="0" x2="500" y2="200" stroke="#414144" stroke-width="1" />
 </svg>
 ```
+
+--end of file--

@@ -1,28 +1,65 @@
-# W16_PiDashboard
+# 1. (Work16) Pi Dashboard
 
-working on build a dashboard webpage on a Rasberry Pi, it has datetime and weather info.
+Working on build a dashboard webpage on a Rasberry Pi, it has datetime and weather info.
 
-## References
+It costed me about 4 days to achieve this effect:
+![221](./90-markdown-resources/221-pidashboard-functions.png)
 
-1. https://www.timeanddate.com/sun/canada/waterloo
-2. https://andrewmarsh.com/apps/releases/sunpath2d.html
-3. https://kitchenerwaterloo.weatherstats.ca/
-4. https://www.smarty.ninja/ecosystems-en/home-assistant/tracking-sun-and-moon-in-home-assistant/#google_vignette
-5. https://weather.wilmslowastro.com/index.php
+## 1.1. Functions
 
-### Reference 1. Apple weather app
+1. It shows the clock and reminds the sunset and sunrise time
+2. It shows the process of time in a day throught the 24-hour ruler
+3. It shows the current weather and 5-day forecast
+4. It mainly has a dark theme so it's quite okay to display it all the time as a dashboard at the doorway.
 
-![apple weather app](./90-markdown-resources/7-apple%20weather%20app%20example.png)
+### 1.1.1. How you can deploy it in your own machine in 1 minute.
 
-### Reference 2. hass (home assistant sun card)
+Well it's simple and has many ways, the simplest way is :
 
-Link : https://github.com/AitorDB/home-assistant-sun-card
+```py
+#git pull the code, the code is in this folder:
+"22-PiDashboard-V1.0-Release"
+#0 go to `app.py` and set your own localtion LAT-LON
+LAT, LON = 43.47053, -80.56186
+#1 run this to install dependencies
+pip install -r requirements.txt
+#2 run the website (you need to first cd to where app.py sits)
+python3 app.py
+```
 
-| Day                                            | Night                                              |
-| ---------------------------------------------- | -------------------------------------------------- |
-| ![day](./90-markdown-resources/4-hass-day.png) | ![night](./90-markdown-resources/5-hass-night.png) |
+Then you can open your browser at address `localhost:5000` and see the dashboard.
 
-|                                                                        |                                                                     |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| **hass** is using a fixed Bezier curve. It's **NOT** my best choice.   | ![hass sun path](./90-markdown-resources/3-hass-sun-trajectory.png) |
-| Sine wave looks better: [https://www.desmos.com/calculator/nqfu5lxaij] | ![sine wave](./90-markdown-resources/15-sine-wave.png)              |
+Alternatively you can use other WGSI tools to host the website, that is beyond the topic of this project.
+
+```sh
+gunicorn -w 4 -b 0.0.0.0:8000 app:app
+```
+
+## 1.2. How I build it/ How does it work
+
+### Technology stack
+
+![222](./90-markdown-resources/222-technology-stack.png)
+I use Flask+python for the backend, use pure css/html/js for the front end. The sun-card is dranwn using svg. The weather data is fetched from Openweathermap.com with a free account.
+
+### Control flow / Data flow
+
+![223](./90-markdown-resources/223-control-data-flow.png)
+
+The control flow for this little dashboard website is simple. app.py is the backend, it has only one thread running the server. Backend does not do anything actively. It offers '/data1' and '/data2' endpoints.
+
+1. '/data1' has the weather data for 'weather-card', it also contains sunset infor for 'sun-card'.
+2. '/data2' has the 5 days' forcast info.
+
+The frontend has 4 js files. global.js is the sun-data that B passes to A.
+
+- A runs at 1hz to update sun and clock, it has a internal divider to run every 1min to update sun curve and horizon.
+- B runs every 1 min to get '/data1' and update all the components in 'weather-card'
+- C runs every 10 min to get '/data2' and update the 'forecast-card'.
+
+When page is loaded:
+
+- A delays 1 second to wait for B's data
+- B and C run to get data without delay.
+
+---EndofFile---

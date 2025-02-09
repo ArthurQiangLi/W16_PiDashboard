@@ -6,8 +6,6 @@ There are 3 ways I've known here:
 2. The OpenWeather API also return the sunset-sunrise data as <br> `"sys": { "type": 2, "id": 2099608, "country": "CA", "sunrise": 1738845125, "sunset": 1738881614 },`
 3. The is standalone program to calculate base on LAT, LON, and date. I haven't tested this method.
 
-I'll choose the 2nd way by now. [2025-02-06 18:42:01]
-
 ## Example data:
 
 For now I found the most important data are `sunrise`, `sunset`, and `solar_noon`. However, the `solar_noon` is the middle value of sunrise and sunset. So you only need two.
@@ -30,4 +28,39 @@ For now I found the most important data are `sunrise`, `sunset`, and `solar_noon
 "tzid": "America/Toronto"
 }
 
+```
+
+## I'll choose the 2nd way by now. [2025-02-06 18:42:01]
+
+In `b.js` I used the '/data1' result and parsed the sunset-sunrise data.
+The original json data was like:
+
+```json
+"sys": { "type": 2, "id": 2099608, "country": "CA", "sunrise": 1738845125, "sunset": 1738881614 },
+"timezone": -18000,
+```
+
+```js
+// Function to update g_sunData from /data1
+function updateSunData(data) {
+  if (data.sys && data.sys.sunrise && data.sys.sunset) {
+    const timezoneOffset = data.timezone;
+
+    g_sunData.sunrise = convertToLocalTime(data.sys.sunrise, timezoneOffset);
+    g_sunData.sunset = convertToLocalTime(data.sys.sunset, timezoneOffset);
+
+    // Calculate Solar Noon (average of sunrise and sunset)
+    const solarNoonTimestamp = (data.sys.sunrise + data.sys.sunset) / 2;
+    g_sunData.solar_noon = convertToLocalTime(solarNoonTimestamp, timezoneOffset);
+
+    g_sunData.timezone = timezoneOffset;
+    //console.log(g_sunData);
+  }
+}
+```
+
+The extracted data was stored to `global.js` which has only one line of code:
+
+```js
+var g_sunData = { sunrise: "06:00", sunset: "18:00", solar_noon: "12:00", timezone: -18000 };
 ```
