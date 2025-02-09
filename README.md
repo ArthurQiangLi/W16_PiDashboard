@@ -35,6 +35,9 @@ Alternatively you can use other WGSI tools to host the website, that is beyond t
 gunicorn -w 4 -b 0.0.0.0:8000 app:app
 ```
 
+Effect of running on a 19-inch old screen .
+![224](./90-markdown-resources/224-running-on-a-pi-19inch-screen.png)
+
 ## 1.2. How I build it/ How does it work
 
 ### Technology stack
